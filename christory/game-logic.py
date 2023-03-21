@@ -7,17 +7,21 @@ class TurnHandler:
 
 
 class CivInitializer:
-    #TODO -- create method that generates random spawn positions for each ov the civs
-    #TODO -- add docs 4 me
     def generate_spawn_position(self):
         while True:
             civ_total = len(Game.civs.index)
-            spawns = np.sort(np.random.randint(0, 800, size=civ_total))
-            #Removing duplicates from spawns array by converting to a set. Sorting both so array_equal returns True regardless of number order.
-            unique_spawns = np.sort(np.array(np.array(list(set(spawns)))))
-
-            if np.array_equal(spawns, unique_spawns):
-                break
+            spawns_x = np.sort(np.random.randint(0, 800, size=civ_total))
+            spawns_y = np.sort(np.random.randint(0, 400, size=civ_total))
+            #TEst this plsss my uhh whats it called umm VS didnt work for some reason have 2 reinstall LOL!
+            SpawnHolder = {
+                "X": spawns_x,
+                "Y": spawns_y
+            }
+            spawns = pd.DataFrame(SpawnHolder)
+            #Thsi makes a new uhh wastrhey called thingy thingy SHEET thats what its called but uhh it works (: also idk might delete stuff oh Im going through a tunnel goodbye
+            #Also uhh change this name IDK what the files called (:
+            with pd.ExcelWriter('Christory.xlsx',mode='a') as writer:  
+                spawns.to_excel(writer, sheet_name='Spawns')
 
         return spawns
 
